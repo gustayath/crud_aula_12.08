@@ -1,0 +1,5 @@
+Algumas explicações sobre SQL e Django Query
+
+1 - Apache é um servidor que retorma HTML, CSS e JS para a máquina do usuário.
+
+2 - ORM é um 'tradudor' de SQL para o Django através das QuerySets 
