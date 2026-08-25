@@ -1,10 +1,148 @@
-<h1>PAINEL PRINCIPAL - RESTRITO</h1>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Principal</title>
 
-<h1>Bem-vindo ao Painel!</h1>
-<p>Olá, {{ request.user.username }}!</p>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<!-- Botão de Logout -->
-<form action="{% url 'logout' %}" method="POST">
-    {% csrf_token %}
-    <button type="submit">Sair da Conta</button>
-</form>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #0f172a, #1e3a5f);
+            min-height: 100vh;
+            padding: 40px 20px;
+            color: #333;
+        }
+
+        .painel {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #0f172a;
+            margin-bottom: 15px;
+        }
+
+        h1:first-child {
+            color: #dc2626;
+            font-size: 24px;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+
+        p {
+            color: #64748b;
+            margin-bottom: 25px;
+            font-size: 16px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        th {
+            background: #0f172a;
+            color: #fff;
+            padding: 14px;
+            text-align: left;
+        }
+
+        td {
+            padding: 14px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        tr:hover td {
+            background: #f1f5f9;
+        }
+
+        form {
+            text-align: right;
+        }
+
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            background: #dc2626;
+            color: #fff;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #b91c1c;
+        }
+
+        @media (max-width: 600px) {
+            .painel {
+                padding: 20px;
+            }
+
+            table {
+                font-size: 14px;
+            }
+
+            th, td {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="painel">
+
+        <h1>PAINEL PRINCIPAL - RESTRITO</h1>
+
+        <h1>Bem-vindo ao Painel!</h1>
+
+        <p>Olá, {{ request.user.first_name }}!</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome de Usuário</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for usuario in usuarios %}
+                <tr>
+                    <td>{{ usuario.first_name }}</td>
+                    <td>{{ usuario.email }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Botão de Logout -->
+        <form action="{% url 'logout' %}" method="POST">
+            {% csrf_token %}
+            <button type="submit">Sair da Conta</button>
+        </form>
+
+    </div>
+
+</body>
+</html>
