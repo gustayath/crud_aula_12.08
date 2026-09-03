@@ -1,6 +1,3 @@
-```python
-markdown_content = """# 🚀 CRUD - Sistema de Cadastro
-
 > Aplicação web desenvolvida com Python e Django para gerenciamento de cadastros, autenticação de usuários e operações CRUD completas.
 
 ---
@@ -88,7 +85,7 @@ crud_aula_12.08/
 
 Antes de iniciar o projeto, certifique-se de possuir instalado em sua máquina:
 
-* [Python 3.x](https://www.python.org/)
+* [Python 3.14](https://www.python.org/)
 * Gerenciador de pacotes `pip`
 * [Git](https://git-scm.com/)
 
