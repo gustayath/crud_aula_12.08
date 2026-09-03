@@ -1,141 +1,675 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-
+</head>
+<body>
     <style>
         * {
-            margin: 0;
-            padding: 0;
             box-sizing: border-box;
         }
 
+        html {
+            min-height: 100%;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #0f172a, #1e3a5f);
+            margin: 0;
             min-height: 100vh;
+            padding: 30px 15px;
+
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            color: #333;
+
+            font-family: "Trebuchet MS", Arial, sans-serif;
+            color: #18556d;
+
+            position: relative;
+            overflow: hidden;
+
+            background:
+                linear-gradient(
+                    to bottom,
+                    #36c9f2 0%,
+                    #8de8fa 38%,
+                    #dffaff 63%,
+                    #8be276 64%,
+                    #43bd4e 100%
+                );
         }
 
-        .container {
-            background: #fff;
-            width: 100%;
-            max-width: 400px;
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        /* Brilho suave do céu */
+        body::before {
+            content: "";
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            top: -280px;
+            left: 50%;
+            transform: translateX(-50%);
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(255,255,255,.65) 0%,
+                    rgba(255,255,255,.25) 35%,
+                    transparent 70%
+                );
+
+            pointer-events: none;
+            animation: sunGlow 6s ease-in-out infinite alternate;
         }
+
+        /* Pequenas bolhas do ambiente */
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+
+            background:
+                radial-gradient(circle at 8% 25%, rgba(255,255,255,.8) 0 4px, transparent 5px),
+                radial-gradient(circle at 15% 70%, rgba(255,255,255,.5) 0 3px, transparent 4px),
+                radial-gradient(circle at 88% 32%, rgba(255,255,255,.75) 0 5px, transparent 6px),
+                radial-gradient(circle at 78% 75%, rgba(255,255,255,.45) 0 3px, transparent 4px),
+                radial-gradient(circle at 92% 85%, rgba(255,255,255,.65) 0 4px, transparent 5px);
+
+            animation: bubbles 8s ease-in-out infinite alternate;
+        }
+
+        /* Nuvens */
+        h2::before,
+        h2::after {
+            content: "";
+            position: fixed;
+
+            width: 170px;
+            height: 55px;
+
+            border-radius: 50px;
+
+            background: rgba(255,255,255,.72);
+
+            box-shadow:
+                45px -18px 0 8px rgba(255,255,255,.72),
+                95px 3px 0 3px rgba(255,255,255,.65);
+
+            filter: blur(.5px);
+            z-index: -1;
+        }
+
+        h2::before {
+            top: 14%;
+            left: -30px;
+            animation: cloudLeft 24s linear infinite;
+        }
+
+        h2::after {
+            top: 28%;
+            right: -50px;
+            animation: cloudRight 28s linear infinite;
+        }
+
+        @keyframes cloudLeft {
+            0% {
+                transform: translateX(-20px);
+            }
+
+            50% {
+                transform: translateX(190px);
+            }
+
+            100% {
+                transform: translateX(-20px);
+            }
+        }
+
+        @keyframes cloudRight {
+            0% {
+                transform: translateX(30px);
+            }
+
+            50% {
+                transform: translateX(-190px);
+            }
+
+            100% {
+                transform: translateX(30px);
+            }
+        }
+
+        @keyframes sunGlow {
+            from {
+                opacity: .65;
+                transform: translateX(-50%) scale(.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(-50%) scale(1.08);
+            }
+        }
+
+        @keyframes bubbles {
+            from {
+                transform: translateY(0);
+            }
+
+            to {
+                transform: translateY(-18px);
+            }
+        }
+
+        /* =========================================
+           TÍTULO
+        ========================================= */
 
         h2 {
-            text-align: center;
-            margin-bottom: 25px;
-            color: #0f172a;
-            font-size: 28px;
+            margin: 0 0 22px;
+
+            position: relative;
+
+            color: #ffffff;
+
+            font-size: 38px;
+            font-weight: bold;
+            letter-spacing: 1px;
+
+            text-shadow:
+                0 2px 0 #2387a8,
+                0 4px 9px rgba(0,90,120,.35),
+                0 0 18px rgba(255,255,255,.45);
+
+            animation: titleFloat 4s ease-in-out infinite;
         }
 
-        label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 7px;
-            color: #334155;
+        @keyframes titleFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-5px);
+            }
         }
+
+        /* =========================================
+           MENSAGENS
+        ========================================= */
+
+        body > p[style] {
+            width: 100%;
+            max-width: 410px;
+
+            margin: 0 0 14px;
+            padding: 10px 14px;
+
+            color: #a52d2d !important;
+
+            text-align: center;
+
+            background:
+                linear-gradient(
+                    to bottom,
+                    rgba(255,255,255,.95),
+                    rgba(255,225,225,.9)
+                );
+
+            border: 2px solid #ffaaaa;
+            border-radius: 15px;
+
+            box-shadow:
+                0 5px 15px rgba(120,50,50,.18),
+                inset 0 2px 0 rgba(255,255,255,.9);
+
+            animation: messageIn .45s ease-out;
+        }
+
+        @keyframes messageIn {
+            from {
+                opacity: 0;
+                transform: translateY(-12px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* =========================================
+           PAINEL PRINCIPAL
+        ========================================= */
+
+        form {
+            width: 100%;
+            max-width: 410px;
+
+            padding: 32px;
+
+            position: relative;
+            overflow: hidden;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,.94),
+                    rgba(211,248,255,.84)
+                );
+
+            border: 2px solid rgba(255,255,255,.95);
+            border-radius: 28px;
+
+            box-shadow:
+                0 18px 40px rgba(0,90,120,.28),
+                0 5px 12px rgba(0,100,140,.15),
+                inset 0 2px 0 rgba(255,255,255,1),
+                inset 0 -10px 20px rgba(70,190,220,.12);
+
+            backdrop-filter: blur(10px);
+
+            animation:
+                formEnter .7s ease-out,
+                formFloat 6s ease-in-out 1s infinite;
+
+            transition: .3s ease;
+        }
+
+        /* Reflexo branco passando pelo painel */
+        form::before {
+            content: "";
+            position: absolute;
+
+            width: 45%;
+            height: 180%;
+
+            top: -40%;
+            left: -70%;
+
+            transform: rotate(25deg);
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(255,255,255,.55),
+                    transparent
+                );
+
+            pointer-events: none;
+
+            animation: glassShine 7s ease-in-out infinite;
+        }
+
+        /* Brilho interno */
+        form::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+
+            border-radius: 28px;
+
+            box-shadow:
+                inset 0 0 25px rgba(255,255,255,.35);
+
+            pointer-events: none;
+        }
+
+        @keyframes formEnter {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(.96);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes formFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-4px);
+            }
+        }
+
+        @keyframes glassShine {
+            0%, 55% {
+                left: -70%;
+            }
+
+            80%, 100% {
+                left: 140%;
+            }
+        }
+
+        form:hover {
+            transform: translateY(-5px);
+
+            box-shadow:
+                0 24px 50px rgba(0,90,120,.32),
+                0 0 25px rgba(80,220,255,.18),
+                inset 0 2px 0 rgba(255,255,255,1);
+        }
+
+        /* =========================================
+           LABELS
+        ========================================= */
+
+        label {
+            display: inline-block;
+
+            margin-bottom: 7px;
+
+            color: #17617d;
+
+            font-size: 15px;
+            font-weight: bold;
+
+            text-shadow:
+                0 1px 0 #ffffff;
+        }
+
+        /* =========================================
+           INPUTS
+        ========================================= */
 
         input {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #cbd5e1;
-            border-radius: 8px;
+            height: 47px;
+
+            padding: 0 14px;
+
             outline: none;
+
+            border: 2px solid #8ed5e7;
+            border-radius: 14px;
+
+            background:
+                linear-gradient(
+                    to bottom,
+                    #ffffff 0%,
+                    #f0fcff 100%
+                );
+
+            color: #19566d;
+
+            font-family: inherit;
             font-size: 15px;
-            margin-bottom: 18px;
-            transition: 0.3s;
+
+            box-shadow:
+                inset 0 3px 7px rgba(0,90,120,.08),
+                0 2px 0 rgba(255,255,255,.9);
+
+            transition:
+                .25s ease;
+        }
+
+        input:hover {
+            border-color: #55c5df;
+
+            box-shadow:
+                0 0 10px rgba(50,190,220,.15),
+                inset 0 3px 7px rgba(0,90,120,.08);
         }
 
         input:focus {
-            border-color: #38bdf8;
-            box-shadow: 0 0 5px rgba(56, 189, 248, 0.4);
+            border-color: #24b4da;
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 0 0 4px rgba(40,185,220,.14),
+                0 0 17px rgba(50,200,235,.25),
+                inset 0 3px 7px rgba(0,90,120,.08);
         }
 
-        .mensagem {
-            background: #fee2e2;
-            color: #dc2626;
-            padding: 10px;
-            border-radius: 7px;
-            margin-bottom: 18px;
-            text-align: center;
-        }
+        /* =========================================
+           BOTÃO AERO
+        ========================================= */
 
         button {
             width: 100%;
-            padding: 13px;
-            border: none;
-            border-radius: 8px;
-            background: #38bdf8;
-            color: #0f172a;
-            font-size: 16px;
+            height: 51px;
+
+            margin-top: 4px;
+
+            position: relative;
+            overflow: hidden;
+
+            border: 2px solid #168c39;
+            border-radius: 17px;
+
+            background:
+                linear-gradient(
+                    to bottom,
+                    #9af26b 0%,
+                    #55d545 45%,
+                    #29a938 100%
+                );
+
+            color: #ffffff;
+
+            font-family: inherit;
+            font-size: 17px;
             font-weight: bold;
+
+            text-shadow:
+                0 1px 2px rgba(0,80,0,.5);
+
             cursor: pointer;
-            transition: 0.3s;
+
+            box-shadow:
+                0 5px 0 #19832d,
+                0 8px 16px rgba(0,100,30,.25),
+                inset 0 2px 0 rgba(255,255,255,.7);
+
+            transition:
+                .18s ease;
+        }
+
+        /* Reflexo do botão */
+        button::before {
+            content: "";
+
+            position: absolute;
+
+            width: 65%;
+            height: 100%;
+
+            top: 0;
+            left: -100%;
+
+            transform: skewX(-25deg);
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(255,255,255,.65),
+                    transparent
+                );
+
+            animation: buttonGlow 3.5s infinite;
+        }
+
+        @keyframes buttonGlow {
+            0%, 55% {
+                left: -100%;
+            }
+
+            80%, 100% {
+                left: 140%;
+            }
         }
 
         button:hover {
-            background: #0ea5e9;
-            color: #fff;
+            transform: translateY(-3px);
+
+            filter: brightness(1.07);
+
+            box-shadow:
+                0 8px 0 #19832d,
+                0 12px 22px rgba(0,100,30,.3),
+                0 0 16px rgba(110,255,100,.25),
+                inset 0 2px 0 rgba(255,255,255,.8);
         }
 
-        .cadastro {
+        button:active {
+            transform: translateY(4px);
+
+            box-shadow:
+                0 1px 0 #19832d,
+                0 3px 8px rgba(0,100,30,.2),
+                inset 0 2px 0 rgba(255,255,255,.5);
+        }
+
+        /* =========================================
+           LINK
+        ========================================= */
+
+        body > p:last-child {
+            width: 100%;
+            max-width: 410px;
+
+            margin: 18px 0 0;
+
             text-align: center;
-            margin-top: 20px;
-            color: #64748b;
-        }
 
-        .cadastro a {
-            color: #0284c7;
+            color: #ffffff;
             font-weight: bold;
-            text-decoration: none;
+
+            text-shadow:
+                0 1px 3px rgba(0,80,110,.55);
+
+            animation: linkAppear .8s ease-out .25s both;
         }
 
-        .cadastro a:hover {
-            text-decoration: underline;
+        @keyframes linkAppear {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        a {
+            display: inline-block;
+
+            margin-left: 5px;
+            padding: 5px 12px;
+
+            color: #ffffff;
+            font-weight: bold;
+
+            text-decoration: none;
+
+            background:
+                linear-gradient(
+                    to bottom,
+                    #51d4ef,
+                    #159dcc
+                );
+
+            border: 1px solid rgba(255,255,255,.9);
+            border-radius: 13px;
+
+            box-shadow:
+                0 3px 7px rgba(0,80,120,.25),
+                inset 0 1px 0 rgba(255,255,255,.8);
+
+            transition: .2s ease;
+        }
+
+        a:hover {
+            transform: translateY(-2px);
+
+            filter: brightness(1.08);
+
+            box-shadow:
+                0 5px 11px rgba(0,80,120,.3),
+                0 0 13px rgba(70,210,240,.3),
+                inset 0 1px 0 rgba(255,255,255,.9);
+        }
+
+        a:active {
+            transform: translateY(1px);
+        }
+
+        /* =========================================
+           MOBILE
+        ========================================= */
+
+        @media (max-width: 500px) {
+            body {
+                padding: 20px 12px;
+            }
+
+            h2 {
+                font-size: 31px;
+                margin-bottom: 18px;
+            }
+
+            form {
+                padding: 25px 20px;
+                border-radius: 23px;
+            }
+
+            input {
+                height: 46px;
+            }
+
+            button {
+                height: 49px;
+            }
+        }
+
+        /* Respeita usuários que preferem menos animação */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation: none !important;
+                transition: none !important;
+            }
         }
     </style>
-</head>
 
-<body>
+    <!-- Primeira etapa: coleta e validação do e-mail e da senha. -->
+    <h2>Login</h2>
 
-    <div class="container">
+    <!-- Mostra erros de autenticação ou aviso de conta não ativada. -->
+    {% if messages %}
+        {% for message in messages %}
+            <p style="color: red;">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
 
-        <h2>Login</h2>
+    <!-- POST envia as credenciais para iniciar o fluxo de autenticação. -->
+    <form method="POST" action="{% url 'login' %}">
+        {% csrf_token %}
+        
+        <!-- O e-mail é convertido para username internamente pela view. -->
+        <label>Email:</label><br>
+        <input type="text" name="email" required><br><br>
 
-        {% if messages %}
-            {% for message in messages %}
-                <p class="mensagem">{{ message }}</p>
-            {% endfor %}
-        {% endif %}
+        <label>Senha:</label><br>
+        <input type="password" name="senha" required><br><br>
 
-        <form method="POST" action="{% url 'login' %}">
-            {% csrf_token %}
-            
-            <label>Email:</label>
-            <input type="text" name="email" required>
+        <button type="submit">Avançar</button>
+    </form>
 
-            <label>Senha:</label>
-            <input type="password" name="senha" required>
-
-            <button type="submit">Entrar</button>
-        </form>
-
-        <p class="cadastro">
-            Não tem conta?
-            <a href="{% url 'cadastro' %}">Cadastre-se</a>
-        </p>
-
-    </div>
-
+    <!-- Atalho para novos usuários criarem uma conta. -->
+    <p>Não tem conta? <a href="{% url 'cadastro' %}">Cadastre-se</a></p>
 </body>
 </html>

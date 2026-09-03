@@ -2,144 +2,758 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro</title>
 
     <style>
         * {
-            margin: 0;
-            padding: 0;
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #0f172a, #1e3a5f);
+            margin: 0;
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            color: #fff;
+            padding: 40px 15px;
+
+            font-family: "Trebuchet MS", Arial, sans-serif;
+            color: #164f68;
+
+            overflow-x: hidden;
+
+            background:
+                radial-gradient(circle at 50% -10%, #ffffff 0%, transparent 25%),
+                linear-gradient(
+                    180deg,
+                    #39c8f2 0%,
+                    #8be7fa 38%,
+                    #d9faff 63%,
+                    #7bdc68 64%,
+                    #2baf45 100%
+                );
+
+            position: relative;
         }
 
-        .container {
-            background: #ffffff;
-            color: #333;
-            width: 100%;
-            max-width: 420px;
-            padding: 35px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        /* =========================================
+           CÉU FUTURISTA
+        ========================================= */
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -5;
+
+            background:
+                radial-gradient(
+                    circle at 15% 25%,
+                    rgba(255,255,255,.8) 0 2px,
+                    transparent 3px
+                ),
+                radial-gradient(
+                    circle at 72% 18%,
+                    rgba(255,255,255,.65) 0 1.5px,
+                    transparent 3px
+                ),
+                radial-gradient(
+                    circle at 85% 42%,
+                    rgba(255,255,255,.8) 0 2px,
+                    transparent 3px
+                ),
+                radial-gradient(
+                    circle at 30% 12%,
+                    rgba(255,255,255,.7) 0 1px,
+                    transparent 3px
+                );
+
+            background-size:
+                190px 170px,
+                240px 200px,
+                210px 180px,
+                170px 150px;
+
+            animation: particles 18s linear infinite;
         }
+
+        body::after {
+            content: "";
+            position: fixed;
+            width: 700px;
+            height: 700px;
+            left: 50%;
+            top: 35%;
+
+            transform: translate(-50%, -50%);
+
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -4;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(255,255,255,.28) 0%,
+                    rgba(100,225,255,.12) 35%,
+                    transparent 70%
+                );
+
+            animation: atmosphere 7s ease-in-out infinite alternate;
+        }
+
+        @keyframes particles {
+            from {
+                transform: translateY(0);
+            }
+
+            to {
+                transform: translateY(80px);
+            }
+        }
+
+        @keyframes atmosphere {
+            from {
+                transform: translate(-50%, -50%) scale(.9);
+                opacity: .5;
+            }
+
+            to {
+                transform: translate(-50%, -50%) scale(1.15);
+                opacity: 1;
+            }
+        }
+
+        /* =========================================
+           NUVENS
+        ========================================= */
+
+        h2::before,
+        h2::after {
+            content: "";
+            position: fixed;
+            height: 70px;
+
+            background: rgba(255,255,255,.68);
+            border-radius: 100px;
+
+            filter: blur(1px);
+            z-index: -2;
+
+            box-shadow:
+                45px -20px 0 5px rgba(255,255,255,.65),
+                95px 0 0 12px rgba(255,255,255,.6);
+        }
+
+        h2::before {
+            width: 180px;
+            top: 12%;
+            left: -30px;
+
+            animation: cloudOne 25s linear infinite;
+        }
+
+        h2::after {
+            width: 210px;
+            top: 27%;
+            right: -50px;
+
+            animation: cloudTwo 30s linear infinite;
+        }
+
+        @keyframes cloudOne {
+            0% {
+                transform: translateX(-30px);
+            }
+
+            50% {
+                transform: translateX(180px);
+            }
+
+            100% {
+                transform: translateX(-30px);
+            }
+        }
+
+        @keyframes cloudTwo {
+            0% {
+                transform: translateX(40px);
+            }
+
+            50% {
+                transform: translateX(-170px);
+            }
+
+            100% {
+                transform: translateX(40px);
+            }
+        }
+
+        /* =========================================
+           TÍTULO
+        ========================================= */
 
         h2 {
+            margin: 0 0 25px;
+
             text-align: center;
-            margin-bottom: 25px;
-            color: #0f172a;
+            position: relative;
+
+            font-size: clamp(30px, 6vw, 42px);
+            letter-spacing: 1px;
+
+            color: #ffffff;
+
+            text-shadow:
+                0 2px 0 #1682a6,
+                0 4px 10px rgba(0,90,130,.35),
+                0 0 22px rgba(255,255,255,.7);
+
+            animation: titleFloat 4s ease-in-out infinite;
         }
 
-        label {
-            font-weight: bold;
-            display: block;
-            margin-bottom: 6px;
+        @keyframes titleFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-6px);
+            }
         }
+
+        /* =========================================
+           MENSAGENS DJANGO
+        ========================================= */
+
+        body > p[style] {
+            width: 100%;
+            max-width: 430px;
+
+            margin: 0 auto 15px;
+            padding: 11px 15px;
+
+            color: #9d2929 !important;
+            text-align: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(255,255,255,.95),
+                    rgba(255,230,230,.88)
+                );
+
+            border: 2px solid rgba(255,160,160,.8);
+            border-radius: 16px;
+
+            box-shadow:
+                0 8px 20px rgba(120,40,40,.18),
+                inset 0 1px 0 #fff;
+
+            animation: messageAppear .5s ease-out;
+        }
+
+        @keyframes messageAppear {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* =========================================
+           FORMULÁRIO GLASS / AERO
+        ========================================= */
+
+        form {
+            width: 100%;
+            max-width: 430px;
+
+            padding: 34px;
+
+            position: relative;
+            overflow: hidden;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,.88),
+                    rgba(218,249,255,.73)
+                );
+
+            border: 2px solid rgba(255,255,255,.92);
+            border-radius: 30px;
+
+            box-shadow:
+                0 25px 60px rgba(0,80,120,.3),
+                0 5px 15px rgba(0,120,160,.18),
+                inset 0 2px 0 rgba(255,255,255,.95),
+                inset 0 -15px 30px rgba(70,190,220,.12);
+
+            backdrop-filter: blur(18px);
+
+            animation:
+                formEnter .8s cubic-bezier(.2,.8,.2,1),
+                formFloat 6s ease-in-out 1s infinite;
+
+            transition: .35s ease;
+        }
+
+        /* Reflexo holográfico passando pelo card */
+        form::before {
+            content: "";
+
+            position: absolute;
+            top: -100%;
+            left: -50%;
+
+            width: 40%;
+            height: 300%;
+
+            transform: rotate(25deg);
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(255,255,255,.55),
+                    transparent
+                );
+
+            animation: shine 7s ease-in-out infinite;
+
+            pointer-events: none;
+        }
+
+        /* Borda luminosa */
+        form::after {
+            content: "";
+
+            position: absolute;
+            inset: 0;
+
+            border-radius: 30px;
+
+            box-shadow:
+                inset 0 0 0 1px rgba(90,220,255,.2),
+                inset 0 0 30px rgba(50,200,240,.08);
+
+            pointer-events: none;
+        }
+
+        @keyframes formEnter {
+            from {
+                opacity: 0;
+                transform:
+                    translateY(40px)
+                    scale(.94);
+                filter: blur(5px);
+            }
+
+            to {
+                opacity: 1;
+                transform:
+                    translateY(0)
+                    scale(1);
+                filter: blur(0);
+            }
+        }
+
+        @keyframes formFloat {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        @keyframes shine {
+            0%, 55% {
+                left: -60%;
+            }
+
+            80%, 100% {
+                left: 130%;
+            }
+        }
+
+        form:hover {
+            transform: translateY(-7px) scale(1.01);
+
+            box-shadow:
+                0 30px 70px rgba(0,80,120,.35),
+                0 0 35px rgba(80,220,255,.18),
+                inset 0 2px 0 rgba(255,255,255,.95);
+        }
+
+        /* =========================================
+           LABELS
+        ========================================= */
+
+        label {
+            display: inline-block;
+
+            margin-bottom: 7px;
+
+            font-size: 15px;
+            font-weight: bold;
+
+            color: #17617d;
+
+            text-shadow:
+                0 1px 0 #ffffff;
+
+            transition: .2s ease;
+        }
+
+        label:hover {
+            color: #0797c1;
+        }
+
+        /* =========================================
+           INPUTS
+        ========================================= */
 
         input {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
+            height: 48px;
+
+            padding: 0 15px;
+
+            border: 2px solid #8bd5e8;
+            border-radius: 15px;
+
             outline: none;
+
+            background:
+                linear-gradient(
+                    to bottom,
+                    #ffffff,
+                    #eefcff
+                );
+
+            color: #18536a;
+
+            font-family: inherit;
             font-size: 15px;
-            margin-bottom: 15px;
+
+            box-shadow:
+                inset 0 3px 8px rgba(0,100,130,.08),
+                0 2px 0 rgba(255,255,255,.9);
+
+            transition:
+                border-color .25s ease,
+                box-shadow .25s ease,
+                transform .25s ease,
+                background .25s ease;
+        }
+
+        input:hover {
+            border-color: #4fc7e5;
+
+            box-shadow:
+                0 0 10px rgba(55,200,235,.16),
+                inset 0 3px 8px rgba(0,100,130,.08);
         }
 
         input:focus {
-            border-color: #38bdf8;
-            box-shadow: 0 0 5px rgba(56, 189, 248, 0.4);
+            border-color: #18b6df;
+
+            background:
+                linear-gradient(
+                    to bottom,
+                    #ffffff,
+                    #e6faff
+                );
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 0 0 4px rgba(40,190,225,.15),
+                0 0 18px rgba(40,205,240,.25),
+                inset 0 3px 7px rgba(0,100,130,.08);
         }
 
-        .mensagem {
-            background: #fee2e2;
-            color: #dc2626;
-            padding: 10px;
-            border-radius: 7px;
-            margin-bottom: 15px;
-            text-align: center;
+        input::placeholder {
+            color: #8ab8c5;
         }
+
+        /* =========================================
+           BOTÃO FUTURISTA
+        ========================================= */
 
         button {
             width: 100%;
-            padding: 13px;
-            border: none;
-            border-radius: 8px;
-            background: #38bdf8;
-            color: #0f172a;
-            font-size: 16px;
+            height: 52px;
+
+            margin-top: 5px;
+
+            position: relative;
+            overflow: hidden;
+
+            border: 2px solid #168c39;
+            border-radius: 17px;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #a3fa72 0%,
+                    #58db49 45%,
+                    #24a936 100%
+                );
+
+            color: #ffffff;
+
+            font-family: inherit;
+            font-size: 17px;
             font-weight: bold;
+
+            letter-spacing: .3px;
+
+            text-shadow:
+                0 1px 2px rgba(0,80,0,.5);
+
             cursor: pointer;
-            transition: 0.3s;
+
+            box-shadow:
+                0 5px 0 #19832d,
+                0 8px 18px rgba(0,100,30,.25),
+                inset 0 2px 0 rgba(255,255,255,.7);
+
+            transition:
+                transform .18s ease,
+                box-shadow .18s ease,
+                filter .18s ease;
+        }
+
+        /* brilho do botão */
+        button::before {
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+            left: -100%;
+
+            width: 70%;
+            height: 100%;
+
+            transform: skewX(-25deg);
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(255,255,255,.6),
+                    transparent
+                );
+
+            animation: buttonShine 3.5s infinite;
+        }
+
+        @keyframes buttonShine {
+            0%, 55% {
+                left: -100%;
+            }
+
+            80%, 100% {
+                left: 140%;
+            }
         }
 
         button:hover {
-            background: #0ea5e9;
-            color: white;
+            transform: translateY(-3px);
+
+            filter: brightness(1.08);
+
+            box-shadow:
+                0 8px 0 #19832d,
+                0 12px 25px rgba(0,110,30,.3),
+                0 0 20px rgba(100,255,100,.25),
+                inset 0 2px 0 rgba(255,255,255,.8);
         }
 
-        .login {
+        button:active {
+            transform: translateY(4px);
+
+            box-shadow:
+                0 1px 0 #19832d,
+                0 3px 8px rgba(0,100,30,.2),
+                inset 0 2px 0 rgba(255,255,255,.5);
+        }
+
+        /* =========================================
+           LINK DE LOGIN
+        ========================================= */
+
+        body > p:last-child {
+            width: 100%;
+            max-width: 430px;
+
+            margin: 20px 0 0;
+
             text-align: center;
-            margin-top: 20px;
-            color: #666;
+
+            color: #ffffff;
+            font-weight: bold;
+
+            text-shadow:
+                0 1px 3px rgba(0,80,110,.6);
+
+            animation: fadeUp 1s ease .3s both;
         }
 
-        .login a {
-            color: #0284c7;
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        a {
+            display: inline-block;
+
+            margin-left: 5px;
+            padding: 5px 13px;
+
+            color: #ffffff;
+
             font-weight: bold;
             text-decoration: none;
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #48d5f0,
+                    #149dcc
+                );
+
+            border: 1px solid rgba(255,255,255,.85);
+            border-radius: 13px;
+
+            box-shadow:
+                0 3px 8px rgba(0,80,120,.25),
+                inset 0 1px 0 rgba(255,255,255,.75);
+
+            transition:
+                transform .2s ease,
+                box-shadow .2s ease,
+                filter .2s ease;
         }
 
-        .login a:hover {
-            text-decoration: underline;
+        a:hover {
+            transform: translateY(-2px);
+
+            filter: brightness(1.1);
+
+            box-shadow:
+                0 5px 12px rgba(0,80,120,.3),
+                0 0 15px rgba(80,220,255,.3),
+                inset 0 1px 0 rgba(255,255,255,.85);
+        }
+
+        a:active {
+            transform: translateY(1px);
+        }
+
+        /* =========================================
+           RESPONSIVIDADE
+        ========================================= */
+
+        @media (max-width: 500px) {
+            body {
+                padding: 25px 12px;
+            }
+
+            h2 {
+                font-size: 30px;
+                margin-bottom: 20px;
+            }
+
+            form {
+                padding: 25px 20px;
+                border-radius: 23px;
+            }
+
+            form::after {
+                border-radius: 23px;
+            }
+
+            input {
+                height: 46px;
+            }
+
+            button {
+                height: 50px;
+            }
+        }
+
+        /* =========================================
+           REDUÇÃO DE MOVIMENTO
+        ========================================= */
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
         }
     </style>
 </head>
-
 <body>
+    <!-- Título e formulário principal de criação da conta. -->
+    <h2>Criar Conta</h2>
 
-    <div class="container">
+    <!-- Exibe mensagens de validação e confirmação enviadas pelas views. -->
+    {% if messages %}
+        {% for message in messages %}
+            <p style="color: red;">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
 
-        <h2>Criar Conta</h2>
+    <!-- POST envia os dados para a view de cadastro; CSRF protege a requisição. -->
+    <form method="POST" action="{% url 'cadastro' %}">
+        {% csrf_token %}
+        
+        <!-- O nome informado é armazenado no campo first_name do usuário. -->
+        <label>Usuário:</label><br>
+        <input type="text" name="usuario" required><br><br>
 
-        {% if messages %}
-            {% for message in messages %}
-                <p class="mensagem">{{ message }}</p>
-            {% endfor %}
-        {% endif %}
+        <!-- O e-mail identifica a conta e recebe o link de ativação. -->
+        <label>E-mail:</label><br>
+        <input type="email" name="email" required><br><br>
 
-        <form method="POST" action="{% url 'cadastro' %}">
-            {% csrf_token %}
-            
-            <label>Usuário:</label>
-            <input type="text" name="usuario" required>
+        <!-- A view compara esta senha com a confirmação e verifica seu tamanho. -->
+        <label>Senha:</label><br>
+        <input type="password" name="senha" required><br><br>
 
-            <label>E-mail:</label>
-            <input type="email" name="email" required>
+        <label>Confirmar Senha:</label><br>
+        <input type="password" name="confirmar_senha" required><br><br>
 
-            <label>Senha:</label>
-            <input type="password" name="senha" required>
+        <button type="submit">Cadastrar</button>
+    </form>
 
-            <label>Confirmar Senha:</label>
-            <input type="password" name="confirmar_senha" required>
-
-            <button type="submit">Cadastrar</button>
-        </form>
-
-        <p class="login">
-            Já possui conta?
-            <a href="{% url 'login' %}">Entrar</a>
-        </p>
-
-    </div>
-
+    <!-- Atalho para usuários que já possuem uma conta. -->
+    <p>Já possui conta? <a href="{% url 'login' %}">Entrar</a></p>
 </body>
 </html>

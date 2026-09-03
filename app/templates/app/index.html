@@ -6,63 +6,589 @@
   <title>Início | Minha Página</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      font-family: Arial, sans-serif;
-      background: #0f172a;
-      color: #fff;
+      font-family: "Trebuchet MS", Arial, sans-serif;
+      color: #15536b;
       min-height: 100vh;
+      overflow: hidden;
+      position: relative;
+
+      background:
+        linear-gradient(
+          to bottom,
+          #35c8f1 0%,
+          #81e4f8 38%,
+          #dffaff 64%,
+          #91df76 65%,
+          #43b84d 100%
+        );
     }
+
+    /* Brilho do céu */
+    body::before {
+      content: "";
+      position: fixed;
+      width: 700px;
+      height: 700px;
+      top: -400px;
+      left: 50%;
+      transform: translateX(-50%);
+
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(255,255,255,.8) 0%,
+          rgba(255,255,255,.3) 35%,
+          transparent 70%
+        );
+
+      pointer-events: none;
+
+      animation: sunGlow 6s ease-in-out infinite alternate;
+    }
+
+    /* Bolhas e pequenos brilhos */
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+
+      background:
+        radial-gradient(circle at 8% 20%,
+          rgba(255,255,255,.9) 0 4px,
+          transparent 5px),
+
+        radial-gradient(circle at 17% 73%,
+          rgba(255,255,255,.6) 0 3px,
+          transparent 4px),
+
+        radial-gradient(circle at 84% 28%,
+          rgba(255,255,255,.8) 0 5px,
+          transparent 6px),
+
+        radial-gradient(circle at 77% 76%,
+          rgba(255,255,255,.5) 0 3px,
+          transparent 4px),
+
+        radial-gradient(circle at 93% 84%,
+          rgba(255,255,255,.75) 0 4px,
+          transparent 5px);
+
+      animation: bubbles 8s ease-in-out infinite alternate;
+    }
+
+    /* =========================================
+       NAVEGAÇÃO
+    ========================================= */
+
     nav {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 24px 8%;
+
+      position: relative;
+      z-index: 5;
     }
-    nav h2 { color: #38bdf8; }
+
+    nav h2 {
+      color: #ffffff;
+
+      font-size: 25px;
+      letter-spacing: .5px;
+
+      text-shadow:
+        0 2px 0 #2385a5,
+        0 3px 8px rgba(0,80,110,.35);
+
+      animation: logoFloat 4s ease-in-out infinite;
+    }
+
     nav a {
-      color: #fff;
+      display: inline-block;
+
+      color: #ffffff;
       text-decoration: none;
       margin-left: 24px;
+
+      padding: 7px 14px;
+
+      border-radius: 14px;
+
+      background:
+        linear-gradient(
+          to bottom,
+          rgba(75,210,240,.9),
+          rgba(20,155,200,.85)
+        );
+
+      border: 1px solid rgba(255,255,255,.75);
+
+      box-shadow:
+        0 3px 8px rgba(0,80,120,.2),
+        inset 0 1px 0 rgba(255,255,255,.8);
+
+      text-shadow:
+        0 1px 2px rgba(0,70,100,.4);
+
+      transition: .25s ease;
     }
-    nav a:hover { color: #38bdf8; }
+
+    nav a:hover {
+      color: #ffffff;
+
+      transform: translateY(-2px);
+
+      filter: brightness(1.1);
+
+      box-shadow:
+        0 5px 12px rgba(0,80,120,.25),
+        0 0 15px rgba(80,220,255,.3),
+        inset 0 1px 0 rgba(255,255,255,.9);
+    }
+
+    /* =========================================
+       NUVENS
+    ========================================= */
+
+    nav::before,
+    nav::after {
+      content: "";
+
+      position: fixed;
+
+      width: 190px;
+      height: 60px;
+
+      border-radius: 50px;
+
+      background: rgba(255,255,255,.72);
+
+      box-shadow:
+        50px -20px 0 9px rgba(255,255,255,.7),
+        105px 4px 0 4px rgba(255,255,255,.64);
+
+      filter: blur(.5px);
+
+      z-index: -1;
+    }
+
+    nav::before {
+      top: 13%;
+      left: -50px;
+
+      animation: cloudLeft 25s linear infinite;
+    }
+
+    nav::after {
+      top: 31%;
+      right: -70px;
+
+      animation: cloudRight 29s linear infinite;
+    }
+
+    /* =========================================
+       HERO
+    ========================================= */
+
     main {
       min-height: 80vh;
+
       display: flex;
       justify-content: center;
       align-items: center;
+
       text-align: center;
+
       padding: 40px 8%;
+
+      position: relative;
+      z-index: 2;
     }
-    .hero { max-width: 700px; }
+
+    .hero {
+      max-width: 700px;
+
+      padding: 45px 50px;
+
+      position: relative;
+      overflow: hidden;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,.9),
+          rgba(216,248,255,.75)
+        );
+
+      border: 2px solid rgba(255,255,255,.9);
+      border-radius: 32px;
+
+      box-shadow:
+        0 25px 55px rgba(0,80,120,.28),
+        0 5px 15px rgba(0,100,140,.15),
+        inset 0 2px 0 rgba(255,255,255,1),
+        inset 0 -12px 25px rgba(60,190,220,.12);
+
+      backdrop-filter: blur(12px);
+
+      animation:
+        heroEnter .9s cubic-bezier(.2,.8,.2,1),
+        heroFloat 6s ease-in-out 1s infinite;
+
+      transition: .3s ease;
+    }
+
+    /* Reflexo passando pelo vidro */
+    .hero::before {
+      content: "";
+
+      position: absolute;
+
+      width: 40%;
+      height: 180%;
+
+      top: -40%;
+      left: -70%;
+
+      transform: rotate(25deg);
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          rgba(255,255,255,.6),
+          transparent
+        );
+
+      pointer-events: none;
+
+      animation: glassShine 7s ease-in-out infinite;
+    }
+
+    /* Brilho interno */
+    .hero::after {
+      content: "";
+
+      position: absolute;
+      inset: 0;
+
+      border-radius: 32px;
+
+      box-shadow:
+        inset 0 0 30px rgba(255,255,255,.35);
+
+      pointer-events: none;
+    }
+
+    .hero:hover {
+      transform: translateY(-7px) scale(1.01);
+
+      box-shadow:
+        0 30px 65px rgba(0,80,120,.34),
+        0 0 30px rgba(80,220,255,.2),
+        inset 0 2px 0 rgba(255,255,255,1);
+    }
+
+    /* =========================================
+       TÍTULO
+    ========================================= */
+
     .hero h1 {
       font-size: 3.5rem;
+
       margin-bottom: 20px;
+
+      color: #17617d;
+
+      text-shadow:
+        0 2px 0 #ffffff,
+        0 4px 10px rgba(0,90,120,.15);
+
+      animation: titleFloat 4s ease-in-out infinite;
     }
-    .hero h1 span { color: #38bdf8; }
+
+    .hero h1 span {
+      color: #159fc7;
+
+      text-shadow:
+        0 1px 0 #ffffff,
+        0 0 12px rgba(60,210,240,.25);
+    }
+
     .hero p {
       color: #cbd5e1;
       font-size: 1.1rem;
       line-height: 1.6;
       margin-bottom: 30px;
     }
+
+    /* =========================================
+       BOTÕES
+    ========================================= */
+
     .btn {
       display: inline-block;
-      background: #38bdf8;
-      color: #0f172a;
+
+      position: relative;
+      overflow: hidden;
+
+      background:
+        linear-gradient(
+          to bottom,
+          #8ff36b 0%,
+          #54d545 45%,
+          #28a936 100%
+        );
+
+      color: #ffffff;
+
       padding: 14px 28px;
-      border-radius: 8px;
+
+      margin: 5px;
+
+      border-radius: 16px;
+
+      border: 2px solid #178b38;
+
       text-decoration: none;
+
       font-weight: bold;
+
+      text-shadow:
+        0 1px 2px rgba(0,80,0,.5);
+
+      box-shadow:
+        0 5px 0 #19832d,
+        0 8px 17px rgba(0,100,30,.25),
+        inset 0 2px 0 rgba(255,255,255,.7);
+
+      transition:
+        transform .18s ease,
+        box-shadow .18s ease,
+        filter .18s ease;
     }
-    .btn:hover { background: #7dd3fc; }
-    footer {
-      text-align: center;
-      color: #64748b;
-      padding: 20px;
+
+    /* Reflexo dos botões */
+    .btn::before {
+      content: "";
+
+      position: absolute;
+
+      width: 65%;
+      height: 100%;
+
+      top: 0;
+      left: -100%;
+
+      transform: skewX(-25deg);
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          rgba(255,255,255,.65),
+          transparent
+        );
+
+      animation: buttonShine 3.5s infinite;
     }
+
+    .btn:hover {
+      background:
+        linear-gradient(
+          to bottom,
+          #a2f57c 0%,
+          #63dd51 45%,
+          #35b842 100%
+        );
+
+      transform: translateY(-3px);
+
+      filter: brightness(1.08);
+
+      box-shadow:
+        0 8px 0 #19832d,
+        0 12px 24px rgba(0,100,30,.3),
+        0 0 18px rgba(100,255,100,.25),
+        inset 0 2px 0 rgba(255,255,255,.8);
+    }
+
+    .btn:active {
+      transform: translateY(4px);
+
+      box-shadow:
+        0 1px 0 #19832d,
+        0 3px 8px rgba(0,100,30,.2),
+        inset 0 2px 0 rgba(255,255,255,.5);
+    }
+
+    /* =========================================
+       ANIMAÇÕES
+    ========================================= */
+
+    @keyframes sunGlow {
+      from {
+        opacity: .65;
+        transform: translateX(-50%) scale(.95);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(-50%) scale(1.08);
+      }
+    }
+
+    @keyframes bubbles {
+      from {
+        transform: translateY(0);
+      }
+
+      to {
+        transform: translateY(-20px);
+      }
+    }
+
+    @keyframes logoFloat {
+      0%, 100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-4px);
+      }
+    }
+
+    @keyframes cloudLeft {
+      0% {
+        transform: translateX(-20px);
+      }
+
+      50% {
+        transform: translateX(220px);
+      }
+
+      100% {
+        transform: translateX(-20px);
+      }
+    }
+
+    @keyframes cloudRight {
+      0% {
+        transform: translateX(30px);
+      }
+
+      50% {
+        transform: translateX(-220px);
+      }
+
+      100% {
+        transform: translateX(30px);
+      }
+    }
+
+    @keyframes heroEnter {
+      from {
+        opacity: 0;
+        transform:
+          translateY(40px)
+          scale(.94);
+
+        filter: blur(5px);
+      }
+
+      to {
+        opacity: 1;
+        transform:
+          translateY(0)
+          scale(1);
+
+        filter: blur(0);
+      }
+    }
+
+    @keyframes heroFloat {
+      0%, 100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-5px);
+      }
+    }
+
+    @keyframes titleFloat {
+      0%, 100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-6px);
+      }
+    }
+
+    @keyframes glassShine {
+      0%, 55% {
+        left: -70%;
+      }
+
+      80%, 100% {
+        left: 140%;
+      }
+    }
+
+    @keyframes buttonShine {
+      0%, 55% {
+        left: -100%;
+      }
+
+      80%, 100% {
+        left: 140%;
+      }
+    }
+
+    /* =========================================
+       RESPONSIVIDADE
+    ========================================= */
+
     @media (max-width: 600px) {
-      .hero h1 { font-size: 2.4rem; }
-      nav a { margin-left: 10px; }
+      .hero {
+        padding: 35px 22px;
+        border-radius: 25px;
+      }
+
+      .hero h1 {
+        font-size: 2.4rem;
+      }
+
+      nav {
+        padding: 20px 5%;
+      }
+
+      nav a {
+        margin-left: 6px;
+        padding: 6px 9px;
+      }
+
+      .btn {
+        display: block;
+        margin: 10px auto;
+        max-width: 240px;
+      }
+    }
+
+    /* Respeita usuários que preferem menos movimento */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
+      }
     }
   </style>
 </head>
