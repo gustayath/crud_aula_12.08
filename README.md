@@ -1,35 +1,40 @@
 CRUD - Sistema de Cadastro
 
-Projeto desenvolvido em Django com o objetivo de praticar a construção de uma aplicação web com operações de CRUD (Create, Read, Update e Delete), sistema de login e painel de gerenciamento.
+Aplicação web desenvolvida com Python e Django para gerenciamento de cadastros, autenticação de usuários e operações CRUD.
+
+
+
+
+
 
 Sobre o projeto
 
-Este projeto foi desenvolvido como atividade prática para aprendizado do framework Django e dos principais conceitos de desenvolvimento web com Python.
+O CRUD - Sistema de Cadastro é um projeto desenvolvido para colocar em prática conceitos fundamentais do desenvolvimento web utilizando o framework Django.
 
-A aplicação possui uma estrutura organizada em diferentes módulos, incluindo:
+A aplicação conta com uma estrutura modular, incluindo sistema de autenticação, cadastro de informações e painel de gerenciamento.
 
-Login — gerenciamento da autenticação dos usuários.
-Cadastro — gerenciamento dos registros da aplicação.
-Painel — área principal do sistema após o acesso.
-Sistema — configurações e URLs principais do projeto.
+O projeto foi desenvolvido com foco em aprendizado e aplicação prática dos conceitos de desenvolvimento web com Python.
 
-O projeto utiliza o sistema de templates do Django e possui estrutura para migrations, models, views e testes.
-
-Tecnologias utilizadas
-Python
-Django 6.1
-Django ORM
-HTML / Templates Django
-Git e GitHub
-Dependências
-
-As principais dependências estão definidas no arquivo requirements.txt:
-
-asgiref==3.12.1
-Django==6.1
-sqlparse==0.5.5
-tzdata==2026.3
-
+Funcionalidades
+Sistema de autenticação de usuários
+Cadastro de informações
+Visualização de registros
+Edição de registros
+Exclusão de registros
+Painel de gerenciamento
+Integração com banco de dados através do Django ORM
+Sistema de migrations
+Interface baseada em templates Django
+Área administrativa do Django
+Tecnologias
+Tecnologia	Utilização
+Python	Linguagem de programação
+Django 6.1	Framework web
+Django ORM	Comunicação com o banco de dados
+HTML	Estrutura das páginas
+Django Templates	Renderização das páginas
+Git	Controle de versão
+GitHub	Hospedagem do código
 Estrutura do projeto
 crud_aula_12.08/
 │
@@ -69,28 +74,35 @@ crud_aula_12.08/
 ├── notas.txt
 └── requirements.txt
 
+Requisitos
+
+Antes de iniciar o projeto, certifique-se de possuir instalado:
+
+Python 3.x
+pip
+Git
 Instalação
 1. Clone o repositório
 git clone https://github.com/gustayath/crud_aula_12.08.git
 
-2. Acesse a pasta do projeto
+2. Entre no diretório
 cd crud_aula_12.08
 
 3. Crie um ambiente virtual
-
-No Windows:
-
+Windows
 python -m venv venv
 
 
-Ative o ambiente virtual:
+Ative o ambiente:
 
 venv\Scripts\activate
 
-
-No Linux/macOS:
-
+Linux / macOS
 python3 -m venv venv
+
+
+Ative o ambiente:
+
 source venv/bin/activate
 
 4. Instale as dependências
@@ -103,56 +115,108 @@ python manage.py migrate
 python manage.py runserver
 
 
-Depois, acesse no navegador:
+A aplicação estará disponível em:
 
 http://127.0.0.1:8000/
 
 Criando um superusuário
 
-Para acessar o painel administrativo do Django, crie um superusuário utilizando:
+Para acessar o painel administrativo do Django, execute:
 
 python manage.py createsuperuser
 
 
-Depois, siga as instruções exibidas no terminal.
+Informe o nome de usuário, e-mail e senha solicitados pelo Django.
 
-O painel administrativo poderá ser acessado em:
+Após criar o usuário, acesse:
 
 http://127.0.0.1:8000/admin/
 
-Funcionalidades
- Estrutura baseada em Django
- Sistema de login
- Área de cadastro
- Painel do sistema
- Models utilizando Django ORM
- Migrations
- Templates HTML
- Integração com Git/GitHub
- Operações CRUD
-Objetivo
+Comandos úteis
+Iniciar o servidor
+python manage.py runserver
 
-O principal objetivo deste projeto é colocar em prática conceitos fundamentais do desenvolvimento de aplicações web utilizando Python e Django, especialmente:
+Criar migrations
+python manage.py makemigrations
 
-Arquitetura de projetos Django;
-Criação de aplicações;
-Models e banco de dados;
-Views;
-Templates;
-URLs;
-Autenticação;
-Operações CRUD;
-Migrations;
-Organização de código.
+Aplicar migrations
+python manage.py migrate
+
+Criar superusuário
+python manage.py createsuperuser
+
+Executar os testes
+python manage.py test
+
+Django Apps
+
+O projeto está dividido em diferentes aplicações para facilitar a organização do código.
+
+cadastro
+
+Responsável pelas funcionalidades relacionadas ao cadastro e gerenciamento dos registros.
+
+login
+
+Responsável pelo sistema de autenticação e acesso dos usuários.
+
+painel
+
+Responsável pela área principal do sistema após o usuário realizar o login.
+
+sistema
+
+Contém as configurações principais do projeto Django, incluindo:
+
+Configurações do projeto
+URLs principais
+WSGI
+ASGI
+Banco de dados
+
+O projeto utiliza o Django ORM para comunicação com o banco de dados.
+
+As alterações na estrutura dos modelos devem ser aplicadas utilizando o sistema de migrations do Django:
+
+python manage.py makemigrations
+python manage.py migrate
+
+Objetivo acadêmico
+
+Este projeto tem como objetivo praticar os principais conceitos necessários para o desenvolvimento de aplicações web utilizando Django.
+
+Entre os conceitos trabalhados estão:
+
+Estrutura de projetos Django
+Criação e configuração de aplicações
+Models
+Views
+Templates
+URLs
+Django ORM
+Migrations
+Autenticação
+CRUD
+Organização de projetos
+Controle de versão com Git
 Aprendizados
 
-Durante o desenvolvimento, foram trabalhados conceitos importantes para a criação de sistemas web, desde a configuração inicial de um projeto Django até a criação de páginas, modelos, views e funcionalidades de autenticação.
+Durante o desenvolvimento do projeto, foram aplicados conceitos relacionados à construção de uma aplicação web completa utilizando Python e Django.
+
+O projeto também proporciona prática com a organização de aplicações Django, integração entre diferentes componentes do framework e utilização do GitHub para versionamento e compartilhamento do código.
 
 Autor
 
 Gustayath
 
-GitHub: https://github.com/gustayath
+GitHub:
+https://github.com/gustayath
+
+Repositório
+
+O código-fonte deste projeto está disponível no GitHub:
+
+https://github.com/gustayath/crud_aula_12.08
 
 Licença
 
