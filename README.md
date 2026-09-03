@@ -26,7 +26,7 @@ A aplicação conta com uma estrutura modular, incluindo sistema de autenticaç�
 
 | Tecnologia | Utilização |
 | :--- | :--- |
-| ![Python](https://img.shields.io/badge/Python-3.x-blue?style=flat-square&logo=python&logoColor=white) | Linguagem de programação |
+| ![Python](https://img.shields.io/badge/Python-3.14-blue?style=flat-square&logo=python&logoColor=white) | Linguagem de programação |
 | ![Django](https://img.shields.io/badge/Django-6.1-green?style=flat-square&logo=django&logoColor=white) | Framework web |
 | **Django ORM** | Comunicação com o banco de dados |
 | **HTML / CSS** | Estruturação e estilização das páginas |
